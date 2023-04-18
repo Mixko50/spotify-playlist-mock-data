@@ -6,10 +6,11 @@ import (
 	model "mock_spotify_data/model/db"
 	"mock_spotify_data/utils/text"
 	"strconv"
+	"sync"
 	"time"
 )
 
-func Level3Operation() {
+func Level3Operation(wg *sync.WaitGroup) {
 	nowTime := time.Now()
 
 	for _, item := range *CurrentData.Items {
@@ -122,4 +123,6 @@ func Level3Operation() {
 			nowTime = nowTime.Add(time.Minute * 1)
 		}
 	}
+
+	wg.Done()
 }

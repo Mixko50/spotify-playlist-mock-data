@@ -6,9 +6,10 @@ import (
 	model "mock_spotify_data/model/db"
 	"mock_spotify_data/utils/text"
 	"strconv"
+	"sync"
 )
 
-func Level2Operation() {
+func Level2Operation(wg *sync.WaitGroup) {
 	for _, item := range *CurrentData.Items {
 
 		// --------------- Artist ---------------
@@ -79,4 +80,6 @@ func Level2Operation() {
 			panic(result.Error)
 		}
 	}
+
+	wg.Done()
 }

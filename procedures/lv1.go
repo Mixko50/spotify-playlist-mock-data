@@ -6,9 +6,10 @@ import (
 	model "mock_spotify_data/model/db"
 	"mock_spotify_data/utils/text"
 	"strconv"
+	"sync"
 )
 
-func Level1Operation() {
+func Level1Operation(wg *sync.WaitGroup) {
 	for _, item := range *CurrentData.Items {
 		releaseYear, err := strconv.ParseInt(item.Track.Album.ReleaseDate[0:4], 10, 64)
 		if err != nil {
@@ -32,4 +33,5 @@ func Level1Operation() {
 			log.Fatal(result.Error)
 		}
 	}
+	wg.Done()
 }

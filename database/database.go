@@ -24,6 +24,8 @@ func Init() {
 
 	log.Println("Initializing the database")
 
+	DropAllTables()
+
 	databaseInitErr := Gorm.AutoMigrate(
 		&model.Lv1Track{},
 		&model.Lv2Artist{},
